@@ -1,8 +1,8 @@
-<!-- Recent Cards plugin -->
+<!-- Hilight Cards plugin -->
 <!-- IF topics.length -->
 <div class="recent-cards-plugin preventSlideOut">
 	<ul class="categories">
-		<p>{recentCards.title}</p>
+		<h1 class="parent-category-title">{recentCards.title}</h1>
 	</ul>
 
 	<ul class="row recent-cards carousel-mode" itemscope itemtype="http://www.schema.org/ItemList">
@@ -12,7 +12,7 @@
 
 			<a style="color: {topics.category.color};" href="{config.relative_path}/topic/{topics.slug}" itemprop="url">
 				<div class="recent-card">
-					<div class="bg" style="opacity:{recentCards.opacity};<!-- IF topics.category.image -->background-image: url({topics.category.image});<!-- ELSE --><!-- IF topics.category.bgColor -->background-color: {topics.category.bgColor};<!-- ENDIF topics.category.bgColor --><!-- ENDIF topics.category.image -->"></div>
+					<div class="bg" style="opacity:{recentCards.opacity};<!-- IF topics.pic -->background-image: url({topics.pic});<!-- ELSE --><!-- IF topics.category.bgColor -->background-color: {topics.category.bgColor};<!-- ENDIF topics.category.bgColor --><!-- ENDIF topics.pic -->"></div>
 					<div class="topic-info" style="color: {topics.category.color};">
 						<span class="h4" itemprop="description">{topics.title}</span>
 						<br>

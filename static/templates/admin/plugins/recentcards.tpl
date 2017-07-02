@@ -29,6 +29,12 @@
 					</div>
 
 					<div class="form-group">
+						<label for="topics">Topic Data</label>
+						<textarea type="text" id="topics" data-key="topics" title="topics" class="form-control" placeholder="1:/img.jpg,2:/abc.png">
+						</textarea>
+					</div>
+
+					<div class="form-group">
 						<div class="checkbox">
 							<label for="enableCarousel">
 								<input type="checkbox" data-key="enableCarousel" id="enableCarousel" name="enableCarousel" />

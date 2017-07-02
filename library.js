@@ -6,7 +6,7 @@ var topics = module.parent.require('./topics');
 var settings = module.parent.require('./settings');
 var groups = module.parent.require('./groups');
 var socketAdmin = module.parent.require('./socket.io/admin');
-var defaultSettings = { title: 'Recent Topics', opacity: '1.0', textShadow: 'none', enableCarousel: 0, enableCarouselPagination: 0 };
+var defaultSettings = { title: 'Recent Topics', opacity: '1.0', textShadow: 'none', topics: '', enableCarousel: 0, enableCarouselPagination: 0 };
 
 var plugin = module.exports;
 
@@ -30,7 +30,7 @@ plugin.addAdminNavigation = function(header, callback) {
 	header.plugins.push({
 		route: '/plugins/recentcards',
 		icon: 'fa-tint',
-		name: 'Recent Cards'
+		name: 'Hilight Cards'
 	});
 
 	callback(null, header);
@@ -84,7 +84,24 @@ plugin.getCategories = function(data, callback) {
 			renderCards(err, topics);
 		});
 	} else {
-		topics.getTopicsFromSet('topics:recent', data.req.uid, 0, 19, renderCards);
+		let topic_meta = plugin.settings.get('topics').split(',')
+		let tids = []
+		let pics = []
+
+		for (let i = 0; i < topic_meta.length ; i++) {
+			let tid = topic_meta[i].split(':')[0]
+			let pic = topic_meta[i].split(':')[1]
+			tids.push(tid)
+			pics.push(pic)
+		}
+
+		topics.getTopics(tids, data.req.uid, function(err, topics_data) {
+			for (let i = 0; i < topics_data.length; i++) {
+				topics_data[i].pic = pics[i]
+			}
+			renderCards(err, {topics: topics_data})
+		})
+		//topics.getTopicsFromSet('topics:recent', data.req.uid, 0, 19, renderCards);
 	}
 };
 
