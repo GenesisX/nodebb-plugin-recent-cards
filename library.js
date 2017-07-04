@@ -2,7 +2,6 @@
 
 var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
-var topics = module.parent.require('./topics');
 var settings = module.parent.require('./settings');
 var groups = module.parent.require('./groups');
 var socketAdmin = module.parent.require('./socket.io/admin');
@@ -46,7 +45,7 @@ plugin.getCategories = function(data, callback) {
 
 		if (!plugin.settings.get('enableCarousel')) {
 			while (finalTopics.length < 4 && i < topics.topics.length) {
-				var cid = parseInt(topics.topics[i].cid, 10);
+				var cid = topics.topics[i].cid
 
 				if (cids.indexOf(cid) === -1) {
 					cids.push(cid);
@@ -71,38 +70,19 @@ plugin.getCategories = function(data, callback) {
 		callback(null, data);
 	}
 
-	if (plugin.settings.get('groupName')) {
-		groups.getLatestMemberPosts(plugin.settings.get('groupName'), 19, data.req.uid, function(err, posts) {
-			var topics = {topics: []};
-			for (var p = 0, pp = posts.length; p < pp; p++) {
-				var topic = posts[p].topic;
-				topic.category = posts[p].category;
-				topic.timestampISO = posts[p].timestampISO;
-				topics.topics.push(topic);
-			}
 
-			renderCards(err, topics);
-		});
-	} else {
-		let topic_meta = plugin.settings.get('topics').split(',')
-		let tids = []
-		let pics = []
+	let topic_meta = plugin.settings.get('topics').split(',')
+	let topics_data = []
 
-		for (let i = 0; i < topic_meta.length ; i++) {
-			let tid = topic_meta[i].split(':')[0]
-			let pic = topic_meta[i].split(':')[1]
-			tids.push(tid)
-			pics.push(pic)
-		}
-
-		topics.getTopics(tids, data.req.uid, function(err, topics_data) {
-			for (let i = 0; i < topics_data.length; i++) {
-				topics_data[i].pic = pics[i]
-			}
-			renderCards(err, {topics: topics_data})
-		})
-		//topics.getTopicsFromSet('topics:recent', data.req.uid, 0, 19, renderCards);
+	for (let i = 0; i < topic_meta.length ; i++) {
+		let topic = {}
+		topic.url = topic_meta[i].split(':')[0]
+		topic.pic = topic_meta[i].split(':')[1]
+		topic.cid = i
+		topics_data.push(topic)
 	}
+
+	renderCards(null, {topics: topics_data})
 };
 
 plugin.onNodeBBReady = function () {
