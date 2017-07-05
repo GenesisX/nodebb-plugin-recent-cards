@@ -1,5 +1,5 @@
 /**
- * BxSlider v4.1.2 - Fully loaded, responsive content slider
+ * BxSlider v4.1.3 - Fully loaded, responsive content slider
  * http://bxslider.com
  *
  * Written by: Steven Wanderski, 2014
@@ -16,7 +16,7 @@
 
 .bx-wrapper {
 	position: relative;
-	margin: 0 auto 60px;
+	margin: 0 auto 0px;
 	padding: 0;
 	*zoom: 1;
 }
@@ -26,26 +26,34 @@
 	display: block;
 }
 
-/** THEME
-===================================*/
+.bxslider {
+	margin: 0;
+	padding: 0;
+}
 
-.bx-wrapper .bx-viewport {
+.bx-viewport {
 	border:  5px solid transparent;
-	left: -5px;
 	background: none;
-	
 	/*fix other elements on the page moving (on Chrome)*/
 	-webkit-transform: translatez(0);
 	-moz-transform: translatez(0);
-    	-ms-transform: translatez(0);
-    	-o-transform: translatez(0);
-    	transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+}
+
+/** THEME
+===================================*/
+
+.bx-wrapper {
+	border:  5px solid #fff;
+	background: #fff;
 }
 
 .bx-wrapper .bx-pager,
 .bx-wrapper .bx-controls-auto {
 	position: absolute;
-	bottom: -30px;
+	bottom: -10px;
 	width: 100%;
 }
 
@@ -94,29 +102,30 @@
 }
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
-.bx-wrapper .bx-pager.bx-default-pager a.active {
+.bx-wrapper .bx-pager.bx-default-pager a.active,
+.bx-wrapper .bx-pager.bx-default-pager a:focus {
 	background: #000;
 }
 
 /* DIRECTION CONTROLS (NEXT / PREV) */
 
 .bx-wrapper .bx-prev {
-	left: -12px;
-	cursor: pointer;
+	left: -10px;
 	background: url(plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) no-repeat 0 -32px;
 }
 
 .bx-wrapper .bx-next {
 	right: -10px;
-	cursor: pointer;
 	background: url(plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) no-repeat -43px -32px;
 }
 
-.bx-wrapper .bx-prev:hover {
+.bx-wrapper .bx-prev:hover,
+.bx-wrapper .bx-prev:focus {
 	background-position: 0 0;
 }
 
-.bx-wrapper .bx-next:hover {
+.bx-wrapper .bx-next:hover,
+.bx-wrapper .bx-next:focus {
 	background-position: -43px 0;
 }
 
@@ -162,7 +171,8 @@
 }
 
 .bx-wrapper .bx-controls-auto .bx-start:hover,
-.bx-wrapper .bx-controls-auto .bx-start.active {
+.bx-wrapper .bx-controls-auto .bx-start.active,
+.bx-wrapper .bx-controls-auto .bx-start:focus {
 	background-position: -86px 0;
 }
 
@@ -177,7 +187,8 @@
 }
 
 .bx-wrapper .bx-controls-auto .bx-stop:hover,
-.bx-wrapper .bx-controls-auto .bx-stop.active {
+.bx-wrapper .bx-controls-auto .bx-stop.active,
+.bx-wrapper .bx-controls-auto .bx-stop:focus {
 	background-position: -86px -33px;
 }
 

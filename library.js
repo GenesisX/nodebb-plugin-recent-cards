@@ -74,11 +74,12 @@ plugin.getCategories = function(data, callback) {
 	let topic_meta = plugin.settings.get('topics').split(',')
 	let topics_data = []
 
-	for (let i = 0; i < topic_meta.length ; i++) {
+	for (let i = 0; i < topic_meta.length; i++) {
 		let topic = {}
 		topic.url = topic_meta[i].split(':')[0]
 		topic.pic = topic_meta[i].split(':')[1]
-		topic.cid = i
+		topic.cid = i + 1
+		topic.name = 'card' + topic.cid.toString()
 		topics_data.push(topic)
 	}
 
